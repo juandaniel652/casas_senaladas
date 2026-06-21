@@ -5,24 +5,25 @@ html = """
 <html lang="es">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Registro de Direcciones</title>
 
 <style>
 
 body{
-    font-family: Arial, sans-serif;
-    background-color:#f2f4f7;
+    background:#f5f7fa;
+    font-family:Segoe UI, Arial, sans-serif;
     margin:0;
-    padding:30px;
 }
 
 .contenedor{
-    max-width:1200px;
-    margin:auto;
+    max-width:1300px;
+    margin:40px auto;
     background:white;
-    border-radius:15px;
     padding:30px;
-    box-shadow:0 5px 15px rgba(0,0,0,0.1);
+    border-radius:15px;
+    box-shadow:0 0 20px rgba(0,0,0,.1);
 }
 
 h1{
@@ -39,25 +40,37 @@ table{
 th{
     background:#34495e;
     color:white;
-    padding:14px;
+    padding:15px;
+    text-align:center;
+    border:1px solid #d0d0d0;
 }
 
 td{
     padding:12px;
-    border-bottom:1px solid #ddd;
+    text-align:center;
+    border:1px solid #d0d0d0;
 }
 
 tr:nth-child(even){
-    background:#fafafa;
+    background:#f8f9fb;
 }
 
 tr:hover{
-    background:#eef3f8;
+    background:#e9f0f7;
+}
+
+a{
+    color:#0066cc;
+    text-decoration:none;
+}
+
+a:hover{
+    text-decoration:underline;
 }
 
 </style>
-
 </head>
+
 <body>
 
 <div class="contenedor">
@@ -66,7 +79,6 @@ tr:hover{
 
 <table>
 
-<thead>
 <tr>
 <th>Fecha</th>
 <th>Territorio</th>
@@ -74,26 +86,31 @@ tr:hover{
 <th>Manzana</th>
 <th>Comentarios</th>
 </tr>
-</thead>
-
-<tbody>
 """
 
 for fila in datos:
+
+    direccion = fila["direccion"]
 
     html += f"""
 <tr>
 <td>{fila['fecha']}</td>
 <td>{fila['territorio']}</td>
-<td>{fila['direccion']}</td>
+
+<td>
+<a target="_blank"
+href="https://www.google.com/maps/search/?api=1&query={direccion}">
+{direccion}
+</a>
+</td>
+
 <td>{fila['manzana'].upper()}</td>
 <td>{fila['comentarios']}</td>
+
 </tr>
 """
 
 html += """
-</tbody>
-
 </table>
 
 </div>
@@ -102,7 +119,5 @@ html += """
 </html>
 """
 
-with open("casas_senaladas.html", "w", encoding="utf-8") as archivo:
+with open("index.html","w",encoding="utf-8") as archivo:
     archivo.write(html)
-
-print("casas_senaladas.html generado correctamente")
