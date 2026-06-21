@@ -95,7 +95,7 @@ datos = [
         "territorio": 24,
         "direccion": "Euskadi 3417",
         "manzana": "c",
-        "comentarios": "Hombre. 60 años (Prob Ment)"
+        "comentarios": "Hombre. 60 años (Problemas Mentales)"
     },
     {
         "fecha": "20/06/2024",
