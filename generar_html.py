@@ -32,8 +32,6 @@ body{
     background:white;
     border-radius:15px;
     box-shadow:0 0 20px rgba(0,0,0,.1);
-
-    overflow-x:auto;
 }
 
 h1{
@@ -45,21 +43,20 @@ h1{
 table{
     width:100%;
     border-collapse:collapse;
-    min-width:800px;
 }
 
 th{
     background:#34495e;
     color:white;
     padding:14px;
+    border:1px solid #ddd;
     text-align:center;
-    border:1px solid #d0d0d0;
 }
 
 td{
     padding:12px;
+    border:1px solid #ddd;
     text-align:center;
-    border:1px solid #d0d0d0;
 }
 
 tr:nth-child(even){
@@ -67,20 +64,23 @@ tr:nth-child(even){
 }
 
 tr:hover{
-    background:#eaf2ff;
+    background:#eef4ff;
 }
 
 a{
     color:#0066cc;
     text-decoration:none;
-    font-weight:500;
+    word-break:break-word;
 }
 
 a:hover{
     text-decoration:underline;
 }
 
-@media (max-width: 768px){
+
+/* ===== CELULARES ===== */
+
+@media (max-width:768px){
 
     .contenedor{
         margin:10px;
@@ -88,12 +88,72 @@ a:hover{
     }
 
     h1{
-        font-size:1.4rem;
+        font-size:1.5rem;
     }
 
-    th, td{
+    table,
+    thead,
+    tbody,
+    tr,
+    td{
+        display:block;
+    }
+
+    thead{
+        display:none;
+    }
+
+    tr{
+        background:white;
+        margin-bottom:25px;
+        border-radius:15px;
+        box-shadow:0 3px 10px rgba(0,0,0,.1);
         padding:10px;
-        font-size:14px;
+    }
+
+    td{
+        border:none;
+        border-bottom:1px solid #eee;
+
+        display:flex;
+        flex-direction:column;
+
+        align-items:flex-start;
+
+        gap:5px;
+
+        text-align:left;
+
+        padding:14px 10px;
+    }
+
+    td:last-child{
+        border-bottom:none;
+    }
+
+    td::before{
+        font-weight:bold;
+        color:#34495e;
+    }
+
+    td:nth-child(1)::before{
+        content:"Fecha";
+    }
+
+    td:nth-child(2)::before{
+        content:"Territorio";
+    }
+
+    td:nth-child(3)::before{
+        content:"Dirección";
+    }
+
+    td:nth-child(4)::before{
+        content:"Manzana";
+    }
+
+    td:nth-child(5)::before{
+        content:"Comentarios";
     }
 
 }
@@ -121,7 +181,6 @@ a:hover{
 </thead>
 
 <tbody>
-
 """
 
 for fila in datos:
@@ -137,8 +196,7 @@ for fila in datos:
 <td>{fila['territorio']}</td>
 
 <td>
-<a
-href="https://www.google.com/maps/search/?api=1&query={direccion_url}"
+<a href="https://www.google.com/maps/search/?api=1&query={direccion_url}"
 target="_blank">
 {direccion}
 </a>
@@ -152,7 +210,6 @@ target="_blank">
 """
 
 html += """
-
 </tbody>
 
 </table>
@@ -161,10 +218,10 @@ html += """
 
 </body>
 </html>
-
 """
 
 with open("index.html", "w", encoding="utf-8") as archivo:
     archivo.write(html)
 
 print("index.html generado correctamente.")
+
